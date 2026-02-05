@@ -1,24 +1,28 @@
-# Defensive Cybersecurity Toolkit
+# Defensive Cybersecurity Self-Audit Suite
 
-A Python-based Security Self-Audit Dashboard designed for defensive security analysis.
+A modular Python-based security audit dashboard designed for defensive security analysis and system hardening.
 
 ## Features
 
-- Multi-threaded Port Scanner
+- Multi-threaded TCP Port Scanner
 - Risk Assessment Engine
-- AI-style Risk Explanation
-- Web Dashboard (Flask)
-- Authentication System
-- Localhost Restricted Demo Mode
+- AI-powered Risk Explanation
+- Password Entropy & Crack Time Estimator
+- Secure File Encryption / Decryption (Fernet)
+- System Information Audit
+- Security Hardening Guidance
+- Flask Web Dashboard with Authentication
+- Localhost-restricted demo mode
 
 ## Tech Stack
 
 - Python
 - Flask
 - ThreadPoolExecutor
+- Cryptography (Fernet)
 - HTML/CSS
 
 ## Disclaimer
 
-This tool is intended strictly for defensive security auditing 
+This tool is strictly intended for defensive security auditing 
 on systems you own or have permission to test.
