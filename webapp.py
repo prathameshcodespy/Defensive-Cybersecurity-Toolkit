@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request
 from scanner import scan_ports
 from risk_engine import analyze_risks
+from flask import Flask, render_template, request, redirect, url_for, session
+import os
 
 app = Flask(__name__)
+app.secret_key = os.getenv("SECRET_KEY", "supersecretkey")
 
 def calculate_grade(score):
     if score <= 20:
@@ -16,6 +19,30 @@ def calculate_grade(score):
     else:
         return "F"
 
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if username == "admin" and password == "admin123":
+            session["user"] = username
+            return redirect(url_for("dashboard"))
+        else:
+            return render_template("login.html", error="Invalid credentials")
+
+    return render_template("login.html")
+
+@app.route("/", methods=["GET", "POST"])
+def dashboard():
+    if "user" not in session:
+        return redirect(url_for("login"))
+    
+@app.route("/logout")
+def logout():
+    session.pop("user", None)
+    return redirect(url_for("login"))
+    
 
 @app.route("/", methods=["GET", "POST"])
 def dashboard():

@@ -16,11 +16,12 @@ def explain_risks(risks):
         description = risk["description"]
 
         prompt = f"""
-Port {port} has severity level {severity}.
+Port {port} has severity {severity}.
 Issue: {description}
 
-Explain why this is a security risk.
-Provide short professional mitigation advice.
+1. Explain the security risk.
+2. Provide professional mitigation steps.
+3. Suggest best practices to secure this service.
 """
 
         response = openai.ChatCompletion.create(
