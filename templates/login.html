@@ -1,49 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Login - Cybersecurity Platform</title>
+    <title>Secure Access - AI Cyber Platform</title>
     <style>
         body {
-            background: #0f172a;
-            color: white;
-            font-family: Arial;
+            margin: 0;
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            font-family: Consolas, monospace;
+            color: #00ff88;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .left-panel {
+            width: 60%;
+            padding: 40px;
+            border-right: 1px solid #1e293b;
+        }
+
+        .right-panel {
+            width: 40%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
-        .card {
-            background: #1e293b;
-            padding: 30px;
+
+        .login-box {
+            background: #111827;
+            padding: 40px;
             border-radius: 10px;
             width: 300px;
+            box-shadow: 0 0 20px #00ff88;
         }
+
         input, button {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
-        }
-        button {
-            background: #2563eb;
+            background: #1f2937;
+            border: 1px solid #00ff88;
             color: white;
-            border: none;
         }
+
+        button {
+            background: #00ff88;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .terminal {
+            height: 80%;
+            overflow: hidden;
+        }
+
+        .log-line {
+            animation: scroll 8s linear infinite;
+        }
+
+        @keyframes scroll {
+            from { transform: translateY(100%); }
+            to { transform: translateY(-100%); }
+        }
+
+        h1 {
+            color: #00ff88;
+        }
+
+        .counter {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>Login</h2>
+<div class="container">
 
-    {% if error %}
-        <p style="color:red;">{{ error }}</p>
-    {% endif %}
+    <!-- Left Side: Live Security Feed -->
+    <div class="left-panel">
+        <h1>AI Defensive Cybersecurity Platform</h1>
+        <p>Real-Time Threat Monitoring System</p>
 
-    <form method="POST">
-        <input name="username" placeholder="Username" required>
-        <input name="password" type="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
+        <div class="terminal">
+            <div class="log-line">
+                [02:41:02] Scanning network traffic...<br>
+                [02:41:05] Suspicious port activity detected<br>
+                [02:41:08] Firewall rules verified<br>
+                [02:41:12] CVE intelligence feed updated<br>
+                [02:41:15] Zero-day exploit database synced<br>
+                [02:41:18] Threat analysis in progress...<br>
+                [02:41:22] Intrusion detection active<br>
+                [02:41:25] AI risk engine initialized<br>
+                [02:41:30] Monitoring 142 endpoints<br>
+                [02:41:34] No active breaches detected<br>
+            </div>
+        </div>
+
+        <div class="counter">
+            Active Threat Scans: 1,248<br>
+            Risk Events Today: 37<br>
+            System Status: SECURE
+        </div>
+    </div>
+
+    <!-- Right Side: Login -->
+    <div class="right-panel">
+        <div class="login-box">
+            <h2 style="color:white;">Secure Login</h2>
+
+            {% if error %}
+                <p style="color:red;">{{ error }}</p>
+            {% endif %}
+
+            <form method="POST">
+                <input name="username" placeholder="Username" required>
+                <input name="password" type="password" placeholder="Password" required>
+                <button type="submit">Authenticate</button>
+            </form>
+        </div>
+    </div>
+
 </div>
 
 </body>
