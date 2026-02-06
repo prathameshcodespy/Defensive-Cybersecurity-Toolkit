@@ -1,0 +1,5 @@
+flask
+colorama
+tqdm
+requests
+openai

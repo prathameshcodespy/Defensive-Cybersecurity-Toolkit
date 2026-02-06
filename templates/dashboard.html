@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Cybersecurity Platform</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #0f172a;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        header {
+            padding: 30px;
+            text-align: center;
+            background-color: #1e293b;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            color: #94a3b8;
+        }
+
+        .container {
+            width: 60%;
+            margin: 40px auto;
+        }
+
+        .card {
+            background-color: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        input, button {
+            padding: 12px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 6px;
+            border: none;
+            font-size: 15px;
+        }
+
+        input {
+            background-color: #334155;
+            color: white;
+        }
+
+        button {
+            background-color: #2563eb;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1d4ed8;
+        }
+
+        button:disabled {
+            background-color: #64748b;
+            cursor: not-allowed;
+        }
+
+        .risk-bar-container {
+            background: #334155;
+            height: 25px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .risk-bar {
+            height: 25px;
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+
+        .critical { color: #ef4444; }
+        .medium { color: #facc15; }
+        .low { color: #4ade80; }
+
+        .spinner {
+            border: 5px solid #334155;
+            border-top: 5px solid #2563eb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>AI Defensive Cybersecurity Platform</h1>
+    <p>Real-time Risk Analysis • CVE Intelligence • Compliance Scoring</p>
+</header>
+
+<div class="container">
+
+    <!-- Scan Form -->
+    <div class="card">
+        <h2>Scan Target</h2>
+        <form method="POST" id="scanForm">
+            <input name="target" placeholder="Target IP" required>
+            <input name="start" placeholder="Start Port" required>
+            <input name="end" placeholder="End Port" required>
+            <button type="submit" id="scanBtn">Start Security Scan</button>
+
+            <!-- Loader -->
+            <div id="loader" style="display:none;">
+                <div class="spinner"></div>
+                <p style="text-align:center;">Scanning target... Please wait.</p>
+            </div>
+        </form>
+    </div>
+
+    {% if score is defined %}
+
+    <!-- Risk Summary -->
+    <div class="card">
+        <h2>Security Assessment</h2>
+        <h3>Risk Score: {{ score }}/100</h3>
+
+        <div class="risk-bar-container">
+            <div class="risk-bar"
+                style="
+                    width: {{ score }}%;
+                    background:
+                    {% if score > 70 %}
+                        #ef4444
+                    {% elif score > 40 %}
+                        #facc15
+                    {% else %}
+                        #4ade80
+                    {% endif %};
+                ">
+            </div>
+        </div>
+
+        <h3>Compliance Grade: {{ grade }}</h3>
+    </div>
+
+    {% endif %}
+
+    {% if risks %}
+
+    <!-- Risk Details -->
+    <div class="card">
+        <h2>Detected Vulnerabilities</h2>
+
+        {% for r in risks %}
+            <div style="margin-bottom:20px;">
+                <p><strong>Port:</strong> {{ r.port }}</p>
+                <p class="{{ r.severity|lower }}">
+                    <strong>Severity:</strong> {{ r.severity }}
+                </p>
+                <p><strong>Issue:</strong> {{ r.description }}</p>
+                <p><strong>CVE Reference:</strong> {{ r.cve }}</p>
+                <hr style="border-color:#334155;">
+            </div>
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<footer>
+    Built with Flask • NVD API • AI Risk Engine
+</footer>
+
+<!-- JavaScript for Loader -->
+<script>
+    const form = document.getElementById("scanForm");
+    const loader = document.getElementById("loader");
+    const button = document.getElementById("scanBtn");
+
+    form.addEventListener("submit", function() {
+        loader.style.display = "block";
+        button.disabled = true;
+        button.innerText = "Scanning...";
+    });
+</script>
+
+</body>
+</html>

@@ -1,3 +1,8 @@
+from password_analyzer import calculate_entropy, estimate_crack_time
+from hardening_check import firewall_check, ssh_check, password_policy_check
+from encryption_tool import generate_key, encrypt_file, decrypt_file
+from system_audit import get_os_info, get_python_version, audit_summary
+
 from flask import Flask, render_template, request, redirect, session
 from scanner import scan_ports
 from risk_engine import analyze_risks
@@ -39,11 +44,33 @@ def home():
 
     return render_template("index.html", results=results, risks=risks)
 
-if __name__ == "__main__":
-    app.run(debug=True)
     
     @app.route("/logout")   
     def logout():
      session.pop("logged_in", None)
      return redirect("/login")
+ 
+    @app.route("/password", methods=["GET", "POST"])
+    def password_tool():
+     entropy = None
+    crack_time = None
+
+    if request.method == "POST":
+        password = request.form["password"]
+        entropy = calculate_entropy(password)
+        crack_time = estimate_crack_time(entropy)
+        
+        return render_template("password.html",
+                           entropy=entropy,
+                           crack_time=crack_time)
+    @app.route("/system")
+    def system_info():
+        os_info = get_os_info()
+    python_version = get_python_version()
+    return render_template("system.html", os_info=os_info, python_version=python_version)
+    
+    if __name__ == "__main__":
+        app.run(debug=True)
+
+
 
