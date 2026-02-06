@@ -1,5 +1,5 @@
 flask
-colorama
-tqdm
 requests
+colorama
+gunicorn
 openai
