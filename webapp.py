@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, session
 from scanner import scan_ports
 from risk_engine import analyze_risks
-from flask import Flask, render_template, request, redirect, url_for, session
 import os
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "supersecretkey")
+
 
 def calculate_grade(score):
     if score <= 20:
@@ -18,6 +18,7 @@ def calculate_grade(score):
         return "D"
     else:
         return "F"
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -33,19 +34,20 @@ def login():
 
     return render_template("login.html")
 
-@app.route("/", methods=["GET", "POST"])
-def dashboard():
-    if "user" not in session:
-        return redirect(url_for("login"))
-    
+
 @app.route("/logout")
 def logout():
     session.pop("user", None)
     return redirect(url_for("login"))
-    
+
 
 @app.route("/", methods=["GET", "POST"])
 def dashboard():
+
+    # 🔐 Protect dashboard
+    if "user" not in session:
+        return redirect(url_for("login"))
+
     if request.method == "POST":
         target = request.form["target"]
         start_port = int(request.form["start"])
@@ -55,8 +57,7 @@ def dashboard():
         risks = analyze_risks(open_ports)
 
         total_score = sum(r["score"] for r in risks)
-        if total_score > 100:
-            total_score = 100
+        total_score = min(total_score, 100)
 
         grade = calculate_grade(total_score)
 
@@ -70,8 +71,7 @@ def dashboard():
         )
 
     return render_template("dashboard.html")
-    
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-
