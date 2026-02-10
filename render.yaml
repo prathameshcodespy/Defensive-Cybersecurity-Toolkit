@@ -1,6 +1,9 @@
 services:
   - type: web
-    name: security-toolkit
+    name: ai-cyber-defense
     env: python
-    buildCommand: ""
-    startCommand: python app.py
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+    envVars:
+      - key: JWT_SECRET_KEY
+        value: super_secret_cyber_key

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Cyber Platform - Secure Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: black;
+            font-family: 'Orbitron', monospace;
+            color: #00c3ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Terminal background */
+        .terminal-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            font-size: 14px;
+            opacity: 0.15;
+            white-space: pre-line;
+            pointer-events: none;
+            color: #00c3ff;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 380px;
+            padding: 40px;
+            background: rgba(0, 15, 40, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 0 30px #00c3ff;
+            text-align: center;
+        }
+
+        h2 {
+            text-shadow: 0 0 10px #00c3ff;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            background: black;
+            border: 1px solid #00c3ff;
+            color: #00c3ff;
+            border-radius: 6px;
+        }
+
+        input:focus {
+            box-shadow: 0 0 12px #00c3ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: transparent;
+            border: 1px solid #00c3ff;
+            color: #00c3ff;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00c3ff;
+            color: black;
+            box-shadow: 0 0 20px #00c3ff;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            background: #00c3ff;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="terminal-bg" id="terminal"></div>
+
+<div class="container">
+    <h2>🔐 Secure Registration</h2>
+
+    <form method="POST">
+        <input name="username" placeholder="Username" required>
+        <input name="mobile" placeholder="Mobile Number" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button>Create Secure Account</button>
+    </form>
+</div>
+
+<script>
+const lines = [
+    "Initializing AI Threat Matrix...",
+    "Loading Quantum Firewall...",
+    "Decrypting Secure Channels...",
+    "Scanning Global Attack Nodes...",
+    "Establishing Encrypted Tunnel...",
+    "Verifying Network Integrity...",
+    "Injecting Secure Protocol...",
+    "Authentication Gateway Ready."
+];
+
+let terminal = document.getElementById("terminal");
+let lineIndex = 0;
+let charIndex = 0;
+
+function typeEffect() {
+    if (lineIndex < lines.length) {
+        if (charIndex < lines[lineIndex].length) {
+            terminal.innerHTML += lines[lineIndex].charAt(charIndex);
+            charIndex++;
+            setTimeout(typeEffect, 25);
+        } else {
+            terminal.innerHTML += "\n";
+            charIndex = 0;
+            lineIndex++;
+            setTimeout(typeEffect, 250);
+        }
+    } else {
+        terminal.innerHTML = "";
+        lineIndex = 0;
+        charIndex = 0;
+        setTimeout(typeEffect, 1500);
+    }
+}
+
+typeEffect();
+</script>
+
+</body>
+</html>
