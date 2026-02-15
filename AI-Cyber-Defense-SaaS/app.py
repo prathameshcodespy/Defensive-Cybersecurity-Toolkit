@@ -105,57 +105,50 @@ def home():
 
 @app.route("/register", methods=["GET", "POST"])
 def register_page():
-    if request.method == "GET":
-        return render_template("register.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password = generate_password_hash(request.form["password"])
 
-    username = request.form.get("username")
-    password = generate_password_hash(request.form.get("password"))
+        conn = sqlite3.connect(DATABASE)
+        cursor = conn.cursor()
+        try:
+            cursor.execute(
+                "INSERT INTO users (username, password) VALUES (?, ?)",
+                (username, password)
+            )
+            conn.commit()
+        except:
+            return "User already exists"
+        finally:
+            conn.close()
 
-    conn = sqlite3.connect(DATABASE)
-    cursor = conn.cursor()
+        return redirect("/login")
 
-    try:
-        cursor.execute(
-            "INSERT INTO users (username, password) VALUES (?, ?)",
-            (username, password)
-        )
-        conn.commit()
-    except:
-        conn.close()
-        return render_template("register.html", error="User already exists")
-
-    conn.close()
-    return redirect("/login")
+    return render_template("register.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login_page():
-    if request.method == "GET":
-        return render_template("login.html")
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
 
-    username = request.form.get("username")
-    password = request.form.get("password")
+        conn = sqlite3.connect(DATABASE)
+        cursor = conn.cursor()
+        cursor.execute("SELECT password, role FROM users WHERE username = ?", (username,))
+        user = cursor.fetchone()
+        conn.close()
 
-    conn = sqlite3.connect(DATABASE)
-    cursor = conn.cursor()
-    cursor.execute("SELECT password, role FROM users WHERE username = ?", (username,))
-    user = cursor.fetchone()
-    conn.close()
+        if not user or not check_password_hash(user[0], password):
+            return "Invalid credentials"
 
-    if not user or not check_password_hash(user[0], password):
-        return render_template("login.html", error="Invalid credentials")
+            session["user"] = username
+            session["role"] = user[1]
 
-    access_token = create_access_token(
-        identity=username,
-        additional_claims={"role": user[1]}
-    )
-    refresh_token = create_refresh_token(identity=username)
+        return redirect("/dashboard")
 
-    response = make_response(redirect("/dashboard"))
-    set_access_cookies(response, access_token)
-    set_refresh_cookies(response, refresh_token)
+    return render_template("login.html")
 
-    return response
 
 
 @app.route("/logout")
@@ -168,10 +161,14 @@ def logout():
 # ---------------- PROTECTED UI ----------------
 
 @app.route("/dashboard")
-@jwt_required(locations=["cookies"])
 def dashboard_page():
+    return render_template("dashboard.html")
+
+@app.route("/api/dashboard")
+@jwt_required()
+def dashboard_api():
     current_user = get_jwt_identity()
-    return render_template("dashboard.html", user=current_user)
+    return jsonify({"msg": f"Welcome {current_user}"})
 
 
 @app.route("/admin")
@@ -202,11 +199,7 @@ http://127.0.0.1:5000/login
 """
 )
 
-@app.route("/api/dashboard")
-@jwt_required()
-def dashboard_api():
-    current_user = get_jwt_identity()
-    return jsonify({"msg": f"Welcome {current_user}"})
+
 
 
 @app.route("/api/admin")
@@ -217,6 +210,23 @@ def admin_api():
         return jsonify({"msg": "Admins only"}), 403
     return jsonify({"msg": "Welcome Admin"})
 
+@app.route("/demo")
+def demo():
+    return render_template("demo.html")
+
+@app.route("/scan", methods=["POST"])
+@jwt_required()
+def scan():
+    target = request.form.get("target")
+    start_port = request.form.get("start_port")
+    end_port = request.form.get("end_port")
+
+    result = f"Scanning {target} from port {start_port} to {end_port}..."
+
+    return render_template("dashboard.html", result=result)
+
+
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
+
