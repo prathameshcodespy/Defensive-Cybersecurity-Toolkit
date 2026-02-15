@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Defensive Cybersecurity Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: radial-gradient(circle at top, #0f2027, #0a192f, #000000);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Animated Grid Background */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                rgba(0,255,255,0.05) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(0,255,255,0.05) 50%,
+                rgba(0,255,255,0.05) 75%,
+                transparent 75%
+            );
+            background-size: 50px 50px;
+            animation: moveGrid 10s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveGrid {
+            from { transform: translate(0,0); }
+            to { transform: translate(-50px, -50px); }
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #00f5ff;
+            text-shadow: 0 0 10px #00f5ff;
+        }
+
+        .card {
+            width: 80%;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 15px;
+            background: rgba(10, 30, 60, 0.8);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            transition: 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.7);
+            transform: scale(1.02);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #0a192f;
+            border: 1px solid #00f5ff;
+            color: white;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #00f5ff, #0066ff);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            box-shadow: 0 0 20px #00f5ff;
+        }
+
+        .risk-bar {
+            width: 100%;
+            height: 20px;
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .risk-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00f5ff, #0066ff);
+            transition: width 1s ease-in-out;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 5px 0;
+            color: #00f5ff;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .footer {
+            text-align: center;
+            margin: 40px 0;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>⚡ AI Defensive Cybersecurity Platform</h1>
+
+<div class="card">
+    <h2>🔍 Scan Target</h2>
+    <input type="text" placeholder="Target IP">
+    <input type="text" placeholder="Start Port">
+    <input type="text" placeholder="End Port">
+    <button>Start Security Scan</button>
+</div>
+
+<div class="card">
+    <h2>📊 System Risk Level</h2>
+    <div class="risk-bar">
+        <div class="risk-fill" id="riskFill"></div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>🌍 Live Threat Feed</h2>
+    <ul id="threatList"></ul>
+</div>
+
+<div class="footer">
+    Built with Flask • AI Risk Engine • JWT Security
+</div>
+
+<script>
+    // Animate Risk Meter
+    let risk = Math.floor(Math.random() * 100);
+    document.getElementById("riskFill").style.width = risk + "%";
+
+    // Live Threat Feed Simulation
+    const threats = [
+        "⚠ Brute Force Attack Detected",
+        "🌍 Suspicious IP Activity",
+        "🔥 Malware Injection Attempt",
+        "🛡 Port Scan Detected",
+        "💀 Ransomware Signature Found"
+    ];
+
+    setInterval(() => {
+        const item = document.createElement("li");
+        item.innerText = threats[Math.floor(Math.random()*threats.length)];
+        document.getElementById("threatList").prepend(item);
+    }, 2000);
+</script>
+
+</body>
+</html>

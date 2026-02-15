@@ -1,0 +1,5 @@
+Flask
+flask-jwt-extended
+flask-mail
+apscheduler
+werkzeug

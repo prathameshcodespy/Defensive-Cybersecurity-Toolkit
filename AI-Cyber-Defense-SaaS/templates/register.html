@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Account | AI Cyber Platform</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: radial-gradient(circle at center, #000814 0%, #000000 100%);
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Animated grid background */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,255,255,0.05) 0px,
+                rgba(0,255,255,0.05) 1px,
+                transparent 1px,
+                transparent 40px
+            );
+            animation: moveGrid 15s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            from { transform: translateY(0); }
+            to { transform: translateY(40px); }
+        }
+
+        .register-box {
+            width: 400px;
+            padding: 40px;
+            background: rgba(0, 30, 50, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0,255,255,0.3);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            background: black;
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 15px #00ffff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            background: transparent;
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00ffff;
+            color: black;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .link {
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .link a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+
+        .link a:hover {
+            text-shadow: 0 0 10px #00ffff;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="register-box">
+
+    <h2>🚀 Create Cyber Account</h2>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="text" name="mobile" placeholder="Mobile Number" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+    </form>
+
+    <div class="link">
+        Already have an account?
+        <a href="/login">Login</a>
+    </div>
+
+</div>
+
+<style>
+.shake {
+  animation: shake 0.4s;
+}
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+</style>
+
+<div class="box {% if error %}shake{% endif %}">
+</body>
+</html>

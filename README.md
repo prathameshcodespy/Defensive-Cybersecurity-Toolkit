@@ -1,18 +1,21 @@
-# AI Defensive Cybersecurity Platform
+AI Cyber Defense SaaS Platform
 
-Live Demo:
-https://defensive-cybersecurity-toolkit.onrender.com
+Modern Cybersecurity SaaS built with Flask + JWT Authentication.
 
-## Features
-- Real-time port scanning
-- Dynamic CVE lookup (NVD API)
-- Risk scoring (0–100)
-- Compliance grading (A–F)
-- Modern cybersecurity dashboard UI
+Features
 
-## Tech Stack
-- Python (Flask)
-- Gunicorn
-- NVD API
-- HTML/CSS
-- Render Deployment
+🔐 JWT Authentication (Access + Refresh)
+
+🛡 Role-Based Access (Admin/User)
+
+🌍 Live Threat Feed Simulation
+
+📡 Network Scanner
+
+🔎 CVE Lookup
+
+🔑 Password Analyzer
+
+📊 Risk Engine
+
+📄 Security Report Generator

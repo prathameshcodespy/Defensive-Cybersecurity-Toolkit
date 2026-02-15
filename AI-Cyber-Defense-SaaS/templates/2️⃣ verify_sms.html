@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify SMS OTP</title>
+</head>
+<body>
+
+<h2>Enter OTP</h2>
+
+{% if error %}
+<p style="color:red;">{{ error }}</p>
+{% endif %}
+
+{% if message %}
+<p style="color:green;">{{ message }}</p>
+{% endif %}
+
+<form method="POST" action="/verify-sms">
+    <input type="hidden" name="mobile" value="{{ mobile }}">
+    OTP:<br>
+    <input name="otp" required><br><br>
+    <button>Verify</button>
+</form>
+
+<br>
+
+<form method="POST" action="/resend-sms">
+    <input type="hidden" name="mobile" value="{{ mobile }}">
+    <button type="submit">Resend OTP</button>
+</form>
+
+</body>
+</html>

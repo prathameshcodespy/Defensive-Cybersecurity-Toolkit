@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Cyber Defense Platform</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: white;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 10%;
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            opacity: 0.8;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            opacity: 0.7;
+        }
+
+        .btn {
+            margin-top: 30px;
+            padding: 14px 30px;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+            color: white;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .features {
+            padding: 80px 10%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            background: rgba(255,255,255,0.08);
+            transform: translateY(-5px);
+        }
+
+        .pricing {
+            padding: 80px 10%;
+            text-align: center;
+        }
+
+        .price-card {
+            background: white;
+            color: black;
+            display: inline-block;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+
+        .price-card h2 {
+            margin-top: 0;
+        }
+
+        .price {
+            font-size: 42px;
+            margin: 20px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">AI Cyber Defense</div>
+    <div class="nav-links">
+        <a href="/login">Login</a>
+        <a href="/register">Start Free Trial</a>
+    </div>
+</div>
+
+<div class="hero">
+    <h1>Enterprise-Grade Cyber Security</h1>
+    <p>AI-powered threat detection, vulnerability scanning & risk analytics in one unified platform.</p>
+    <button class="btn" onclick="window.location.href='/register'">Start 7-Day Free Trial</button>
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <h3>🔍 Real-Time Scanning</h3>
+        <p>Continuously monitor ports, vulnerabilities & misconfigurations.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>🧠 AI Risk Engine</h3>
+        <p>Machine-learning powered risk scoring for intelligent decision making.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>📊 Executive Reports</h3>
+        <p>Automated compliance-ready security audit reports.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>🛡 Admin Control Panel</h3>
+        <p>Manage users, roles, and system analytics from one dashboard.</p>
+    </div>
+</div>
+
+<div class="pricing">
+    <h2>Simple Transparent Pricing</h2>
+
+    <div class="price-card">
+        <h2>Pro Plan</h2>
+        <div class="price">$49<span style="font-size:18px;">/month</span></div>
+        <p>✔ Unlimited Scans</p>
+        <p>✔ AI Risk Engine</p>
+        <p>✔ Admin Dashboard</p>
+        <p>✔ Priority Support</p>
+        <br>
+        <button class="btn">Upgrade Now</button>
+    </div>
+</div>
+
+<div class="footer">
+    © 2026 AI Cyber Defense Platform · Built with Flask & AI Risk Engine
+</div>
+
+</body>
+</html>

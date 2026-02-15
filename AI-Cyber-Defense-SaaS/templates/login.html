@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Access | AI Cyber Platform</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffff;
+            overflow: hidden;
+            background: black;
+        }
+
+        /* Hooded hacker background */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.95)),
+                url("https://images.unsplash.com/photo-1510519138101-570d1dca3d66?auto=format&fit=crop&w=1920&q=80");
+            background-size: cover;
+            background-position: center;
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        /* Moving grid overlay */
+        body::after {
+            content: "";
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0,255,255,0.05) 0px,
+                rgba(0,255,255,0.05) 1px,
+                transparent 1px,
+                transparent 40px
+            );
+            animation: moveGrid 15s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes moveGrid {
+            from { transform: translateY(0); }
+            to { transform: translateY(40px); }
+        }
+
+        .center-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 360px;
+            padding: 40px;
+            background: rgba(0, 30, 50, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(0,255,255,0.3);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: black;
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: transparent;
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00ffff;
+            color: black;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        .links {
+            margin-top: 15px;
+            font-size: 12px;
+        }
+
+        .links a {
+            color: #00ffff;
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .terminal-text {
+            font-size: 12px;
+            margin-bottom: 10px;
+            color: #00ffcc;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="center-box">
+    <h2>🔐 AI Secure Authentication</h2>
+
+    <div class="terminal-text" id="typing"></div>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Authenticate</button>
+    </form>
+
+    <div class="links">
+        <a href="/register">Create Account</a> |
+        <a href="/demo">Demo Access</a>
+    </div>
+</div>
+
+<script>
+const text = "Initializing AI Threat Matrix... Secure Channel Established.";
+let index = 0;
+
+function typeEffect() {
+    if (index < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 40);
+    }
+}
+typeEffect();
+</script>
+
+</body>
+</html>
